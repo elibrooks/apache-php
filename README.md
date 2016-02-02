@@ -1,2 +1,2 @@
 # apache-php
-Docker image of Apache + PHP on Ubuntu 14.04
+Docker image of Apache + PHP on Debian Jessie
