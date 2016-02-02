@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM debian:jessie
 MAINTAINER Wisya Yugaswara J <wisya.yugaswara@gmail.com>
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y \
@@ -11,6 +11,7 @@ RUN a2enmod rewrite
 
 COPY apache2.conf /etc/apache2/apache2.conf
 COPY php.ini /etc/php5/apache2/php.ini
+COPY modsecurity.conf /etc/modsecurity/modsecurity.conf
 
 WORKDIR /var/www/html
 
