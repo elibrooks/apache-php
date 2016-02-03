@@ -7,12 +7,15 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y \
   php5-mysql php5-sybase php5-pgsql php5-sqlite \
   php5-intl php5-mcrypt php5-imagick
 
-RUN a2enmod rewrite
+RUN a2enmod rewrite expires headers
 
 COPY apache2.conf /etc/apache2/apache2.conf
 COPY php.ini /etc/php5/apache2/php.ini
+COPY modsecurity.conf /etc/modsecurity/modsecurity.conf
 
-WORKDIR /var/www/html
+# forward request and error logs to docker log collector
+RUN ln -sf /dev/stdout /var/log/apache2/access.log \
+	&& ln -sf /dev/stderr /var/log/apache2/error.log
 
 EXPOSE 80
 EXPOSE 443
